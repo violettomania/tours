@@ -1,16 +1,14 @@
-function Tour() {
+import { SingleTour } from './App';
+
+function Tour({ image, info, name, price }: SingleTour) {
   return (
     <article className='single-tour'>
-      <img
-        src='https://www.course-api.com/images/tours/tour-1.jpeg'
-        alt='Best of Paris in 7 Days Tour'
-        className='img'
-      ></img>
-      <span className='tour-price'></span>
+      <img src={image} alt={name} className='img'></img>
+      <span className='tour-price'>{price}</span>
       <div className='tour-info'>
-        <h3>card title</h3>
+        <h3>{name}</h3>
         <p>
-          Lorem ipsum...
+          {info}
           <button className='info-btn'>read more</button>
         </p>
         <button className='delete-btn btn-block btn'>not interested</button>
