@@ -6,7 +6,7 @@ function Tour({ image, info, name, price }: SingleTour) {
       <img src={image} alt={name} className='img'></img>
       <span className='tour-price'>{`$${price}`}</span>
       <div className='tour-info'>
-        <h3>{name}</h3>
+        <h5>{name}</h5>
         <p>
           {info}
           <button className='info-btn'>...read more</button>
