@@ -5,7 +5,7 @@ const LESS_BTN_TEXT = 'show less';
 
 type ButtonText = typeof MORE_BTN_TEXT | typeof LESS_BTN_TEXT;
 
-interface State {
+interface TourState {
   displayedInfo: string;
   buttonText: ButtonText;
 }
@@ -18,7 +18,7 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
   const truncatedInfo = truncateText(fullInfo, 300);
   const displayButton = fullInfo !== truncatedInfo;
 
-  const [state, setState] = useState<State>({
+  const [state, setState] = useState<TourState>({
     displayedInfo: truncatedInfo,
     buttonText: MORE_BTN_TEXT,
   });
