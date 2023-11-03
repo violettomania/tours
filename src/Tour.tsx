@@ -6,21 +6,31 @@ const LESS_BTN_TEXT = 'show less';
 
 type ButtonText = typeof MORE_BTN_TEXT | typeof LESS_BTN_TEXT;
 
+interface State {
+  displayedInfo: string;
+  buttonText: ButtonText;
+}
+
 const truncateText = (text: string, length: number) => {
   return text.length <= length ? text : `${text.slice(0, length)}...`;
 };
 
 function Tour({ image, info: fullInfo, name, price }: SingleTour) {
   const truncatedInfo = truncateText(fullInfo, 500);
-  const [displayedInfo, setDisplayedInfo] = useState(truncatedInfo);
-  const [buttonText, setButtonText] = useState<ButtonText>(MORE_BTN_TEXT);
+  const displayButton = fullInfo !== truncatedInfo;
+
+  const [state, setState] = useState<State>({
+    displayedInfo: truncatedInfo,
+    buttonText: MORE_BTN_TEXT,
+  });
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setDisplayedInfo((currentInfo) =>
-      currentInfo === fullInfo ? truncatedInfo : fullInfo
-    );
-    setButtonText(displayedInfo === fullInfo ? MORE_BTN_TEXT : LESS_BTN_TEXT);
+    const changedInfo =
+      state.displayedInfo === fullInfo ? truncatedInfo : fullInfo;
+    const btnText =
+      state.buttonText === MORE_BTN_TEXT ? LESS_BTN_TEXT : MORE_BTN_TEXT;
+    setState({ displayedInfo: changedInfo, buttonText: btnText });
   };
 
   return (
@@ -30,10 +40,12 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
       <div className='tour-info'>
         <h5>{name}</h5>
         <p>
-          {`\xa0${displayedInfo}`}
-          <button className='info-btn' onClick={handleClick}>
-            {buttonText}
-          </button>
+          {state.displayedInfo}
+          {displayButton && (
+            <button className='info-btn' onClick={handleClick}>
+              {`\xa0${state.buttonText}`}
+            </button>
+          )}
         </p>
         <button className='delete-btn btn-block btn'>not interested</button>
       </div>
