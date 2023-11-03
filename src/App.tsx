@@ -3,14 +3,6 @@ import Tour from './Tour';
 
 const url = 'https://course-api.com/react-tours-project';
 
-export interface SingleTour {
-  id: string;
-  image: string;
-  info: string;
-  name: string;
-  price: string;
-}
-
 function App() {
   const [tours, setTours] = useState<SingleTour[]>();
 

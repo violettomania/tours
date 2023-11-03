@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { SingleTour } from './App';
 
 const MORE_BTN_TEXT = 'read more';
 const LESS_BTN_TEXT = 'show less';
@@ -16,7 +15,7 @@ const truncateText = (text: string, length: number) => {
 };
 
 function Tour({ image, info: fullInfo, name, price }: SingleTour) {
-  const truncatedInfo = truncateText(fullInfo, 500);
+  const truncatedInfo = truncateText(fullInfo, 300);
   const displayButton = fullInfo !== truncatedInfo;
 
   const [state, setState] = useState<State>({
