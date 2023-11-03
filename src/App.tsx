@@ -29,9 +29,11 @@ function App() {
           <div className='title-underline'></div>
         </div>
         <div className='tours'>
-          {tours?.map((tour) => (
-            <Tour key={tour.id} {...tour} />
-          ))}
+          {tours?.length === 0 ? (
+            <p>no tours available</p>
+          ) : (
+            tours?.map((tour) => <Tour key={tour.id} {...tour} />)
+          )}
         </div>
       </section>
     </main>
