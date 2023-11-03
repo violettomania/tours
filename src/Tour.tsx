@@ -23,13 +23,18 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
     buttonText: MORE_BTN_TEXT,
   });
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleChangeButtonText = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const changedInfo =
       state.displayedInfo === fullInfo ? truncatedInfo : fullInfo;
     const btnText =
       state.buttonText === MORE_BTN_TEXT ? LESS_BTN_TEXT : MORE_BTN_TEXT;
     setState({ displayedInfo: changedInfo, buttonText: btnText });
+  };
+
+  const handleRemoveTour = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log('remove tour');
   };
 
   return (
@@ -41,12 +46,14 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
         <p>
           {state.displayedInfo}
           {displayButton && (
-            <button className='info-btn' onClick={handleClick}>
+            <button className='info-btn' onClick={handleChangeButtonText}>
               {`\xa0${state.buttonText}`}
             </button>
           )}
         </p>
-        <button className='delete-btn btn-block btn'>not interested</button>
+        <button className='delete-btn btn-block btn' onClick={handleRemoveTour}>
+          not interested
+        </button>
       </div>
     </article>
   );
