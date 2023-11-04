@@ -30,11 +30,7 @@ function App() {
             <p>No tours available.</p>
           ) : (
             tours?.map((tour) => (
-              <Tour
-                key={tour.id}
-                tour={tour}
-                handleRemoveTour={handleRemoveTour}
-              />
+              <Tour key={tour.id} tour={tour} onRemoveTour={handleRemoveTour} />
             ))
           )}
         </div>
