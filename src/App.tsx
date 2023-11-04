@@ -30,8 +30,7 @@ function App() {
   };
 
   const handleRemoveTour = (id: string) => {
-    const filteredTours = tours?.filter((tour) => tour.id !== id);
-    setTours(filteredTours);
+    setTours((prevTours) => prevTours?.filter((tour) => tour.id !== id));
   };
 
   const renderNoTours = () => {
