@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import Tour from './Tour';
+import LoadingSpinner from './LoadingSpinner';
 
 const url = 'https://course-api.com/react-tours-project';
 
 function App() {
   const [tours, setTours] = useState<SingleTour[]>();
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchTours = useCallback(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data: SingleTour[]) => {
+        setLoading(false);
         setTours(data);
         if (error) setError(false);
       })
@@ -22,6 +25,7 @@ function App() {
   }, [fetchTours]);
 
   const handleRefresh = () => {
+    setLoading(true);
     fetchTours();
   };
 
@@ -49,6 +53,7 @@ function App() {
           <div className='title-underline'></div>
         </div>
         <div className='tours'>
+          {loading && <LoadingSpinner />}
           {error ? (
             <p>There was an error fetching the tours.</p>
           ) : tours?.length === 0 ? (

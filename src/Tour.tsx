@@ -19,7 +19,7 @@ const truncateText = (text: string, length: number) => {
   return text.length <= length ? text : `${text.slice(0, length)}...`;
 };
 
-const Tour = ({ tour, onRemoveTour }: Props) => {
+export default function Tour({ tour, onRemoveTour }: Props) {
   const { name, image, info: fullInfo, price } = tour;
   const truncatedInfo = truncateText(fullInfo, 300);
   const displayButton = fullInfo !== truncatedInfo;
@@ -63,6 +63,4 @@ const Tour = ({ tour, onRemoveTour }: Props) => {
       </div>
     </article>
   );
-};
-
-export default Tour;
+}
