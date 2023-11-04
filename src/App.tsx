@@ -27,7 +27,7 @@ function App() {
         </div>
         <div className='tours'>
           {tours?.length === 0 ? (
-            <p>no tours available</p>
+            <p>No tours available.</p>
           ) : (
             tours?.map((tour) => (
               <Tour
