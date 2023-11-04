@@ -13,6 +13,11 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
+  const handleRemoveTour = (id: string) => {
+    const filteredTours = tours?.filter((tour) => tour.id !== id);
+    setTours(filteredTours);
+  };
+
   return (
     <main>
       <section>
@@ -24,7 +29,13 @@ function App() {
           {tours?.length === 0 ? (
             <p>no tours available</p>
           ) : (
-            tours?.map((tour) => <Tour key={tour.id} {...tour} />)
+            tours?.map((tour) => (
+              <Tour
+                key={tour.id}
+                tour={tour}
+                handleRemoveTour={handleRemoveTour}
+              />
+            ))
           )}
         </div>
       </section>

@@ -10,11 +10,17 @@ interface TourState {
   buttonText: ButtonText;
 }
 
+interface Props {
+  tour: SingleTour;
+  handleRemoveTour: (id: string) => void;
+}
+
 const truncateText = (text: string, length: number) => {
   return text.length <= length ? text : `${text.slice(0, length)}...`;
 };
 
-function Tour({ image, info: fullInfo, name, price }: SingleTour) {
+const Tour = ({ tour, handleRemoveTour: onRemoveTour }: Props) => {
+  const { name, image, info: fullInfo, price } = tour;
   const truncatedInfo = truncateText(fullInfo, 300);
   const displayButton = fullInfo !== truncatedInfo;
 
@@ -34,7 +40,7 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
 
   const handleRemoveTour = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('remove tour');
+    onRemoveTour(tour.id);
   };
 
   return (
@@ -57,6 +63,6 @@ function Tour({ image, info: fullInfo, name, price }: SingleTour) {
       </div>
     </article>
   );
-}
+};
 
 export default Tour;
