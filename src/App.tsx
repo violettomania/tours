@@ -6,11 +6,19 @@ const url = 'https://course-api.com/react-tours-project';
 function App() {
   const [tours, setTours] = useState<SingleTour[]>();
 
-  useEffect(() => {
+  const fetchTours = async () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setTours(data))
       .catch((error) => console.error(error));
+  };
+
+  const handleRefresh = () => {
+    fetchTours();
+  };
+
+  useEffect(() => {
+    fetchTours();
   }, []);
 
   const handleRemoveTour = (id: string) => {
@@ -27,7 +35,12 @@ function App() {
         </div>
         <div className='tours'>
           {tours?.length === 0 ? (
-            <p>No tours available.</p>
+            <>
+              <p>No tours available.</p>
+              <button className='btn-block btn' onClick={handleRefresh}>
+                refresh
+              </button>
+            </>
           ) : (
             tours?.map((tour) => (
               <Tour key={tour.id} tour={tour} onRemoveTour={handleRemoveTour} />
