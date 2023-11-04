@@ -22,12 +22,12 @@ module.exports = {
       },
       {
         test: /\.js$/, // Match .js files
-        use: 'babel-loader', // Use babel-loader for JavaScript files
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.css$/, // Match .css files
-        use: ['style-loader', 'css-loader'], // Use style-loader and css-loader for CSS files
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
